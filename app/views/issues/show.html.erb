@@ -1,0 +1,24 @@
+<%=
+  html = Nokogiri::HTML.fragment(render(:parent))
+
+  changeset_branches = {}
+  ChangesetsBranch.where(changeset_id: @changesets.map(&:id)).each do |changeset_branch|
+    (changeset_branches[changeset_branch.changeset_id] ||= []) << changeset_branch.branch
+  end
+
+  if changeset_branches.any?
+    branches = ['All'] + changeset_branches.values.flatten.uniq.sort
+
+    html.at_css('#issue-changesets h3').before(
+        select_tag('changeset_branch',options_for_select(branches), onchange: 'filter_changesets_by_branch();')
+    )
+
+    changeset_divs = html.css('div.changeset')
+    changeset_divs.each_with_index do |changeset_div, index|
+      changeset = @changesets[index]
+      changeset_div['data-branches'] = "/#{(changeset_branches[changeset.id] || []).join('/')}/"
+    end
+  end
+
+  raw html
+%>
