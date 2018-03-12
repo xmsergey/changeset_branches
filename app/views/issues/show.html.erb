@@ -20,6 +20,6 @@
     end
   end
 
-  html = html.to_s.gsub('option selected value=', 'option selected="selected" value=')
+  html = html.to_s.gsub('<option selected value=', '<option selected="selected" value=')
   raw html
 %>
