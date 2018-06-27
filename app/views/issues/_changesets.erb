@@ -1,5 +1,5 @@
 <%=
-  html = Nokogiri::HTML.fragment(render(:parent))
+  html = Nokogiri::HTML.fragment(render(:parent, :changesets => @changesets ))
 
   changeset_branches = {}
   ChangesetsBranch.where(changeset_id: @changesets.map(&:id)).each do |changeset_branch|
@@ -9,7 +9,7 @@
   if changeset_branches.any?
     branches = ['All'] + changeset_branches.values.flatten.uniq.sort
 
-    html.at_css('#issue-changesets h3').before(
+    html.at_css('div').before(
         select_tag('changeset_branch',options_for_select(branches), onchange: 'filter_changesets_by_branch();')
     )
 

@@ -1,28 +1,33 @@
 #changeset_branch {
   float: right;
   width: 100%;
+  margin-top: -34px;
 }
 
 @media (min-width: 500px) {
   #changeset_branch {
     width: 65%;
+    margin-top: -34px;
   }
 }
 
 @media (min-width: 900px) {
   #changeset_branch {
     width: 45%;
+    margin-top: -34px;
   }
 }
 
 @media (min-width: 1200px) {
   #changeset_branch {
     width: 55%;
+    margin-top: -34px;
   }
 }
 
 @media (min-width: 1800px) {
   #changeset_branch {
     width: 65%;
+    margin-top: -34px;
   }
 }
